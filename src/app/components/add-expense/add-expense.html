@@ -1,0 +1,48 @@
+<section class="expense-form-shell">
+  <h2>Add New Expense</h2>
+
+  <form class="expense-form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <label for="expense-title">Title</label>
+      <input
+        id="expense-title"
+        type="text"
+        name="title"
+        [(ngModel)]="title"
+        required
+      />
+    </div>
+
+    <div class="form-row">
+      <label for="expense-amount">Amount</label>
+      <input
+        id="expense-amount"
+        type="number"
+        min="0"
+        step="1"
+        name="amount"
+        [(ngModel)]="amount"
+        required
+      />
+    </div>
+
+    <div class="form-row">
+      <label for="expense-category">Category</label>
+      <select
+        id="form-select"
+        name="category"
+        [(ngModel)]="category"
+        required
+      >
+        <option
+          *ngFor="let category of expenseService.expenseCategories()"
+          [value]="category"
+        >
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit">Save Expense</button>
+  </form>
+</section>

@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+:host > * {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  background: #f8fafc;
+}

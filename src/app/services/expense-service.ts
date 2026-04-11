@@ -1,0 +1,76 @@
+import { Injectable, computed, signal } from '@angular/core';
+import { Expense } from '../models/expense';
+import { ExpenseCategory } from '../models/expense-category';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ExpenseService {
+   expenses = signal<Expense[]>([]);
+   expenseCategories = signal<string[]>([
+    'Work',
+    'Travel',
+    'Grocery',
+    'Utilities',
+    'Other',
+  ]);
+   expenseCount = computed(() => this.expenses().length);
+
+  addExpense(expense: Expense) {
+    this.expenses.update((expenses) => {
+      const newExpenses = [ ...expenses];
+      newExpenses.push(expense);
+      return newExpenses;
+
+    });
+  }
+
+  deleteExpense(expenseToDelete: Expense) {
+    this.expenses.update((expenses) => {
+      const newExpenses = [...expenses];
+      for(let i = 0; i < newExpenses.length; i++) {
+        if(expenses[i].id !== expenseToDelete.id) {
+          newExpenses.push(expenses[i]);
+        }
+       
+      }
+      return newExpenses;
+    });
+  }
+
+  getExpenses(): Expense[] {
+    return this.expenses();
+  }
+
+  transactionCount(): number {
+    return this.expenses().length;
+  }
+
+  highestExpense() : number {
+    if (this.expenses().length === 0) {
+      return 0;
+    }
+    let highestExpense = 0;
+      for (const expense of this.expenses()) {
+      if(expense.amount > highestExpense) {
+        highestExpense = expense.amount;
+      }
+    }
+    return highestExpense;
+
+  }
+
+  averageExpense() : number {
+    if (this.expenses().length === 0) {
+      return 0;
+    }
+
+    let total = 0;
+    for (const expense of this.expenses()) {
+      total += expense.amount;
+    }
+    return total / this.expenses().length;
+  }
+
+  
+}

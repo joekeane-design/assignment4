@@ -1,0 +1,43 @@
+.dashboard-shell {
+  padding: 1.5rem 0;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header-title {
+  margin: 0;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  color: #0f172a;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 1rem;
+}
+
+.dashboard-table td {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  vertical-align: top;
+}
+
+.card-title h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.card-content p {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #111827;
+}

@@ -1,0 +1,25 @@
+<main>
+  <h1>All Expenses</h1>
+
+    <div *ngIf="expenses().length; else emptyState">
+        @for(expense of expenses(); track expense.id) {
+            <div class="card-title">
+                <h3>{{ expense.title }}</h3>
+            </div>
+            <div class="card-content">
+                <p>Amount: {{ expense.amount | currency }}</p>
+                <p>Category: {{ expense.category }}</p>
+            </div>
+            <div class="card-footer">
+                <button type="button" (click)="clickEdit(expense)">Edit</button>
+                <button type="button" (click)="clickDelete(expense)">Delete</button>
+            </div>
+        }
+
+
+    </div>
+  <ng-template #emptyState>
+    <p>No expenses yet. Add one above.</p>
+  </ng-template>
+</main>
+
