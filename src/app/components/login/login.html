@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow" style="width: 100%; max-width: 400px;">
+    <div class="card-body p-4">
+      <h2 class="card-title text-center mb-4">Login</h2>
+      <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            email
+            #email="ngModel"
+          >
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            #password="ngModel"
+          >
+          <div *ngIf="password.invalid && password.touched" class="text-danger">
+            Password is required.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+      </form>
+      <div class="text-center mt-3">
+        <p class="mb-0">Don't have an account? <a routerLink="/registration">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
