@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user-service';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-registration',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './registration.html',
   styleUrl: './registration.css',
 })
