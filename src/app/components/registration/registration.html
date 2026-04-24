@@ -2,6 +2,9 @@
   <div class="card shadow" style="width: 100%; max-width: 400px;">
     <div class="card-body p-4">
       <h2 class="card-title text-center mb-4">Register</h2>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
       <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
@@ -13,9 +16,9 @@
             [(ngModel)]="email"
             required
             email
-            #email="ngModel"
+            #emailRef="ngModel"
           >
-          <div *ngIf="email.invalid && email.touched" class="text-danger">
+          <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
             Please enter a valid email.
           </div>
         </div>
@@ -28,13 +31,15 @@
             name="password"
             [(ngModel)]="password"
             required
-            #password="ngModel"
+            #passwordRef="ngModel"
           >
-          <div *ngIf="password.invalid && password.touched" class="text-danger">
+          <div *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
             Password is required.
           </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">Register</button>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid || isLoading">
+          {{ isLoading ? 'Registering...' : 'Register' }}
+        </button>
       </form>
       <div class="text-center mt-3">
         <p class="mb-0">Already have an account? <a routerLink="/login">Login here</a></p>

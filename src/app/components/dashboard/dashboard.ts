@@ -11,7 +11,7 @@ import { UserService } from '../../services/user-service';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
 })
-export class Dashboard implements OnInit {
+export class Dashboard  {
   readonly expenseService = inject(ExpenseService);
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
@@ -22,9 +22,9 @@ export class Dashboard implements OnInit {
   readonly highestExpense = computed(() => this.expenseService.highestExpense());
   readonly averageExpense = computed(() => this.expenseService.averageExpense());
 
-  ngOnInit() {
-    if (!this.userService.getCurrentUser()) {
-      this.router.navigate(['/login']);
-    }
-  }
+  // ngOnInit() {
+  //   if (!this.userService.getCurrentUser()) {
+  //     this.router.navigate(['/login']);
+  //   }
+  // }
 }

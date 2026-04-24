@@ -1,1 +1,13 @@
-<p>expense-item works!</p>
+<div class="expense-item">
+  <div class="card-title">
+    <h3>{{ expense.title }}</h3>
+  </div>
+  <div class="card-content">
+    <p>Amount: {{ expense.amount | currency }}</p>
+    <p>Category: {{ expense.category }}</p>
+  </div>
+  <div class="card-footer">
+    <button type="button" (click)="onEditClick(expense)">Edit</button>
+    <button type="button" (click)="onDeleteClick()">Delete</button>
+  </div>
+</div>

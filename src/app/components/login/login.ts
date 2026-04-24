@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user-service';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication-service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  email: string = '';
-  password: string = '';
+  private authService = inject(AuthenticationService);
+  private router = inject(Router);
 
-  constructor(private userService: UserService, private router: Router) {}
+  email = '';
+  password = '';
+  errorMessage = '';
+  isLoading = false;
 
-  async onLogin(form: any) {
-    if (form.valid) {
-      try {
-        await this.userService.login(this.email, this.password);
-        this.router.navigate(['/dashboard']);
-      } catch (error) {
-        console.error('Login failed:', error);
-        
-      }
+  async onLogin(form: NgForm) {
+    if (form.invalid) return;
+    this.errorMessage = '';
+    this.isLoading = true;
+    try {
+      await this.authService.login(this.email, this.password);
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      this.errorMessage = error instanceof Error ? error.message : 'Login failed. Please try again.';
+    } finally {
+      this.isLoading = false;
     }
   }
-
-  
 }

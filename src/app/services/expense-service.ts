@@ -26,16 +26,19 @@ export class ExpenseService {
   }
 
   deleteExpense(expenseToDelete: Expense) {
-    this.expenses.update((expenses) => {
-      const newExpenses = [...expenses];
-      for(let i = 0; i < newExpenses.length; i++) {
-        if(expenses[i].id !== expenseToDelete.id) {
-          newExpenses.push(expenses[i]);
-        }
-       
-      }
-      return newExpenses;
-    });
+    this.expenses.update((expenses) =>
+      expenses.filter((e) => e.id !== expenseToDelete.id)
+    );
+  }
+
+  updateExpense(updated: Expense) {
+    this.expenses.update((expenses) =>
+      expenses.map((e) => (e.id === updated.id ? updated : e))
+    );
+  }
+
+  getExpenseById(id: number): Expense | undefined {
+    return this.expenses().find((e) => e.id === id);
   }
 
   getExpenses(): Expense[] {
