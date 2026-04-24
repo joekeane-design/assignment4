@@ -14,6 +14,10 @@ export class ExpenseService {
     'Utilities',
     'Other',
   ]);
+  expensetype = signal<string[]>([
+    'expense',
+    'income'
+  ]);
    expenseCount = computed(() => this.expenses().length);
 
   addExpense(expense: Expense) {

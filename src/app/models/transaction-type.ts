@@ -1,2 +1,2 @@
 export type TransactionType =
-    'income' | 'expense';
+    'Income' | 'Expense';

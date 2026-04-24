@@ -1,0 +1,60 @@
+.expense-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1rem;
+}
+
+.card-title h3 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.card-content {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-content p {
+  margin: 0;
+  color: #334155;
+}
+
+.card-content p span {
+  font-weight: 600;
+}
+
+.card-footer {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.card-footer button {
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card-footer button:first-child {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.card-footer button:first-child:hover {
+  background: #1d4ed8;
+}
+
+.card-footer button:last-child {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.card-footer button:last-child:hover {
+  background: #e2e8f0;
+}

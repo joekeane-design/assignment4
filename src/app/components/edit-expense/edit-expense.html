@@ -25,7 +25,22 @@
         required
       />
     </div>
-
+    <div class="form-row">
+      <label for="expense-type">Type</label>
+      <select
+        id="expense-type"
+        name="type"
+        [(ngModel)]="type"
+        required
+      >
+        <option
+          *ngFor="let type of expenseService.expensetype()"
+          [value]=""
+        >
+          {{ type }}
+        </option>
+      </select>
+    </div>
     <div class="form-row">
       <label for="expense-category">Category</label>
       <select
@@ -41,6 +56,26 @@
           {{ cat }}
         </option>
       </select>
+    </div>
+    <div class="form-row">
+      <label for="expense-date">Date (Optional)</label>
+      <input
+        id="expense-date"
+        type="date"
+        name="date"
+        [(ngModel)]="date"
+        
+      />
+    </div>
+    <div class="form-row">
+      <label for="expense-notes">Notes (Optional)</label>
+      <input
+        id="expense-notes"
+        type="text"
+        name="notes"
+        [(ngModel)]="notes"
+        
+      />
     </div>
 
     <button type="submit">Save Changes</button>
