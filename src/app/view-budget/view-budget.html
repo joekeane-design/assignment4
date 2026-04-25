@@ -1,1 +1,54 @@
-<p>view-budget works!</p>
+<main class="budget-shell">
+  <div class="budget-header">
+    <h1>Budget &mdash; {{ currentMonth }}</h1>
+    <a routerLink="/add-budget" class="add-btn">+ Add Budget</a>
+  </div>
+
+  @if (summary().length === 0) {
+    <p class="empty-state">No budgets set for this month. <a routerLink="/add-budget">Add one</a>.</p>
+  } @else {
+    <div class="summary-totals">
+      <div class="total-card">
+        <span class="total-label">Allocated</span>
+        <span class="total-value">{{ totalAllocated() | currency }}</span>
+      </div>
+      <div class="total-card">
+        <span class="total-label">Spent</span>
+        <span class="total-value">{{ totalSpent() | currency }}</span>
+      </div>
+      <div class="total-card" [class.over]="totalRemaining() < 0">
+        <span class="total-label">Remaining</span>
+        <span class="total-value">{{ totalRemaining() | currency }}</span>
+      </div>
+    </div>
+
+    @for (item of summary(); track item.id) {
+      <div class="budget-card" [class.over-budget]="item.isOverBudget">
+        <div class="budget-card-header">
+          <h3>{{ item.categoryName }}</h3>
+          <span class="budget-limit">{{ item.amount | currency }} limit</span>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [class.over]="item.isOverBudget"
+            [style.width.%]="getPercentage(item.spent, item.amount)"
+          ></div>
+        </div>
+
+        <div class="budget-card-stats">
+          <span>Spent: {{ item.spent | currency }}</span>
+          <span [class.over-text]="item.isOverBudget">
+            {{ item.isOverBudget ? 'Over by ' + (item.spent - item.amount | currency) : 'Remaining: ' + (item.remaining | currency) }}
+          </span>
+        </div>
+
+        <div class="budget-card-footer">
+          <button type="button" (click)="editBudget(item.id)">Edit</button>
+          <button type="button" (click)="deleteBudget(item.id)">Delete</button>
+        </div>
+      </div>
+    }
+  }
+</main>

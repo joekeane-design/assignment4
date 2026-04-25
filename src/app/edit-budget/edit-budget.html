@@ -1,1 +1,28 @@
-<p>edit-budget works!</p>
+<section class="budget-form-shell">
+  <h2>Edit Budget</h2>
+
+  <form class="budget-form" (ngSubmit)="onSubmit()">
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div class="form-row">
+      <label>Category</label>
+      <input type="text" [value]="categoryName" disabled />
+    </div>
+
+    <div class="form-row">
+      <label for="budget-amount">Monthly Limit</label>
+      <input
+        id="budget-amount"
+        type="number"
+        name="amount"
+        min="1"
+        step="1"
+        [(ngModel)]="amount"
+        required
+      />
+    </div>
+
+    <button type="submit">Save Changes</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </form>
+</section>

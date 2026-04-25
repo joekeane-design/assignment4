@@ -1,1 +1,34 @@
-<p>add-budget works!</p>
+<section class="budget-form-shell">
+  <h2>Add Budget</h2>
+
+  <div *ngIf="unbudgetedCategories().length === 0" class="empty-state">
+    <p>All categories already have a budget for this month.</p>
+  </div>
+
+  <form *ngIf="unbudgetedCategories().length > 0" class="budget-form" (ngSubmit)="onSubmit()">
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div class="form-row">
+      <label for="budget-category">Category</label>
+      <select id="budget-category" name="category" [(ngModel)]="category" required>
+        <option value="" disabled>Select a category</option>
+        <option *ngFor="let cat of unbudgetedCategories()" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="budget-amount">Monthly Limit</label>
+      <input
+        id="budget-amount"
+        type="number"
+        name="amount"
+        min="1"
+        step="1"
+        [(ngModel)]="amount"
+        required
+      />
+    </div>
+
+    <button type="submit">Save Budget</button>
+  </form>
+</section>

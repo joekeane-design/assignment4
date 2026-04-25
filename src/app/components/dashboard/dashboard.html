@@ -65,6 +65,18 @@
         <p class="no-data">No expenses recorded for this month yet.</p>
       </ng-template>
     </div>
+
+    <div class="chart-card">
+      <div class="card-title">
+        <h3>Budget vs Spending &mdash; {{ currentMonthLabel }}</h3>
+      </div>
+      <div class="chart-container" [style.display]="barChartData().labels.length ? 'block' : 'none'">
+        <canvas #barChart></canvas>
+      </div>
+      <p *ngIf="!barChartData().labels.length" class="no-data">
+        No budgets set for this month. <a routerLink="/add-budget">Add one</a>.
+      </p>
+    </div>
   </main>
 </section>
 
