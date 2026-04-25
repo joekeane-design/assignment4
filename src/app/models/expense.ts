@@ -7,5 +7,5 @@ export interface Expense {
   category: ExpenseCategory;
   type: TransactionType;
   notes?: string;
-  date?: Date;
+  date: Date;
 }

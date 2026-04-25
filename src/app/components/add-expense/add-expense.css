@@ -52,3 +52,38 @@
 .expense-form button:hover {
   background: #1d4ed8;
 }
+
+.add-category-toggle {
+  background: none !important;
+  color: #2563eb !important;
+  font-weight: 600 !important;
+  padding: 0.25rem 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  font-size: 0.875rem;
+}
+
+.add-category-toggle:hover {
+  background: none !important;
+  color: #1d4ed8 !important;
+  text-decoration: underline;
+}
+
+.category-input-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.category-input-row input {
+  flex: 1;
+  margin: 0;
+}
+
+.add-category-btn {
+  width: auto !important;
+  max-width: none !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

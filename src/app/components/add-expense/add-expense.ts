@@ -25,6 +25,19 @@ export class AddExpense {
   type = signal<TransactionType>('Expense');
   date = signal<Date>(new Date());
   notes = signal<string>('');
+
+  newCategory = '';
+  showCategoryInput = false;
+
+  onAddCategory() {
+    const trimmed = this.newCategory.trim();
+    if (!trimmed) return;
+    this.expenseService.addCategory(trimmed);
+    this.category.set(trimmed as ExpenseCategory);
+    this.newCategory = '';
+    this.showCategoryInput = false;
+  }
+
   onSubmit() {
     if (!this.title() || !this.amount() || !this.category()) {
       alert('Please fill in all fields');
@@ -36,6 +49,7 @@ export class AddExpense {
       title: this.title(),
       amount: this.amount(),
       category: this.category() as ExpenseCategory,
+      date: this.date() ?? new Date(),
       type: this.type() as TransactionType,
       notes: this.notes(),
     };

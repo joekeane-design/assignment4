@@ -53,6 +53,7 @@ export class EditExpense implements OnInit {
       title: this.title,
       amount: this.amount,
       category: this.category,
+      date: this.date,
       type: this.type,
       notes: this.notes,
     };

@@ -1,14 +1,16 @@
-<div class="expense-item">
+<div class="expense-item" [style.borderLeftColor]="categoryColor()">
   <div class="card-title">
     <h3>{{ expense.title }}</h3>
   </div>
   <div class="card-content">
     <p>Amount: {{ expense.amount | currency }}</p>
-    <p>Type: {{expense.type }}</p>
-    <p>Category: {{ expense.category }}</p>
-    <p>Date: {{expense.date}}</p>
-    <p>Notes: {{expense.notes}}</p>
-    
+    <p>Type: {{ expense.type }}</p>
+    <p>
+      <span class="category-dot" [style.backgroundColor]="categoryColor()"></span>
+      Category: {{ expense.category }}
+    </p>
+    <p *ngIf="expense.date">Date: {{ expense.date }}</p>
+    <p *ngIf="expense.notes">Notes: {{ expense.notes }}</p>
   </div>
   <div class="card-footer">
     <button type="button" (click)="onEditClick(expense)">Edit</button>

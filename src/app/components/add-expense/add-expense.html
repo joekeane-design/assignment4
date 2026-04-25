@@ -56,6 +56,19 @@
           {{ category }}
         </option>
       </select>
+      <button type="button" class="add-category-toggle" (click)="showCategoryInput = !showCategoryInput">
+        {{ showCategoryInput ? '− Cancel' : '+ Add Category' }}
+      </button>
+    </div>
+
+    <div class="form-row category-input-row" *ngIf="showCategoryInput">
+      <input
+        type="text"
+        name="newCategory"
+        [(ngModel)]="newCategory"
+        placeholder="New category name"
+      />
+      <button type="button" class="add-category-btn" (click)="onAddCategory()">Add</button>
     </div>
     <div class="form-row">
       <label for="expense-date">Date (Optional)</label>

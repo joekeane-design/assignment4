@@ -15,8 +15,8 @@ export class ExpenseService {
     'Other',
   ]);
   expensetype = signal<string[]>([
-    'expense',
-    'income'
+    'Expense',
+    'Income'
   ]);
    expenseCount = computed(() => this.expenses().length);
 
@@ -43,6 +43,17 @@ export class ExpenseService {
 
   getExpenseById(id: number): Expense | undefined {
     return this.expenses().find((e) => e.id === id);
+  }
+
+  addCategory(category: string) {
+    const trimmed = category.trim();
+    if (!trimmed) return;
+    const exists = this.expenseCategories().some(
+      (c) => c.toLowerCase() === trimmed.toLowerCase()
+    );
+    if (!exists) {
+      this.expenseCategories.update((cats) => [...cats, trimmed]);
+    }
   }
 
   getExpenses(): Expense[] {
