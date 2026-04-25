@@ -43,7 +43,28 @@
         </div>
         </td>
       </tr>
+      <tr>
+        <td colspan="2">
+          <div class="card-title">
+            <h3>Monthly Spending</h3>
+          </div>
+          <div class="card-content">
+            <p>{{ monthlySpending() | currency }}</p>
+          </div>
+        </td>
+      </tr>
     </table>
+    <div class="chart-card">
+      <div class="card-title">
+        <h3>Spending by Category &mdash; {{ currentMonthLabel }}</h3>
+      </div>
+      <div *ngIf="categoryChartData().labels.length; else noData" class="chart-container">
+        <canvas #pieChart></canvas>
+      </div>
+      <ng-template #noData>
+        <p class="no-data">No expenses recorded for this month yet.</p>
+      </ng-template>
+    </div>
   </main>
 </section>
 
