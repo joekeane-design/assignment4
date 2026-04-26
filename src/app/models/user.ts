@@ -3,4 +3,6 @@ export interface user {
     email: string;
     password: string;
     budgetGoal: number;
+    expenselistID?: string;
+    budgetID?: string;
 }
