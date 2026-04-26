@@ -8,6 +8,7 @@ import { Registration } from './components/registration/registration';
 import { AddBudget } from './add-budget/add-budget';
 import { ViewBudget } from './view-budget/view-budget';
 import { EditBudget } from './edit-budget/edit-budget';
+import { Profile } from './components/profile/profile';
 import { authGuard } from './guards/auth.guard';
 import { publicGuard } from './guards/public.guard';
 
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'budget',           component: ViewBudget,   canActivate: [authGuard] },
   { path: 'add-budget',       component: AddBudget,    canActivate: [authGuard] },
   { path: 'edit-budget/:id',  component: EditBudget,   canActivate: [authGuard] },
+  { path: 'profile',          component: Profile,      canActivate: [authGuard] },
 
   // Public — redirect to dashboard if already logged in
   { path: 'login',        component: Login,         canActivate: [publicGuard] },

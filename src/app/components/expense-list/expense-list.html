@@ -1,11 +1,60 @@
 <main>
-  <h1>All Expenses</h1>
+  <div class="list-header">
+    <h1>All Expenses</h1>
+    <button type="button" class="filter-toggle" [class.active]="hasActiveFilters" (click)="showFilters = !showFilters">
+      {{ showFilters ? 'Hide Filters' : 'Filter' }}
+      <span *ngIf="hasActiveFilters" class="filter-badge"></span>
+    </button>
+  </div>
 
-  @if (expenses().length) {
-    @for (expense of expenses(); track expense.id) {
+  <div class="filter-panel" *ngIf="showFilters">
+    <div class="filter-grid">
+
+      <div class="filter-row">
+        <label>Category</label>
+        <select name="filterCategory" [(ngModel)]="filterCategory">
+          <option value="">All Categories</option>
+          <option *ngFor="let cat of expenseService.expenseCategories()" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <div class="filter-row">
+        <label>Start Date</label>
+        <input type="date" name="filterStartDate" [(ngModel)]="filterStartDate" />
+      </div>
+
+      <div class="filter-row">
+        <label>End Date</label>
+        <input type="date" name="filterEndDate" [(ngModel)]="filterEndDate" />
+      </div>
+
+      <div class="filter-row">
+        <label>Min Amount</label>
+        <input type="number" name="minAmount" min="0" step="1" placeholder="0" [(ngModel)]="minAmount" />
+      </div>
+
+      <div class="filter-row">
+        <label>Max Amount</label>
+        <input type="number" name="maxAmount" min="0" step="1" placeholder="Any" [(ngModel)]="maxAmount" />
+      </div>
+
+    </div>
+    <button type="button" class="clear-btn" *ngIf="hasActiveFilters" (click)="clearFilters()">
+      Clear Filters
+    </button>
+  </div>
+
+  <p class="result-count" *ngIf="hasActiveFilters">
+    Showing {{ filteredExpenses.length }} of {{ expenseService.expenses().length }} expenses
+  </p>
+
+  @if (expenseService.expenses().length === 0) {
+    <p class="empty-state">No expenses yet. Add one to get started.</p>
+  } @else if (filteredExpenses.length === 0) {
+    <p class="empty-state">No expenses match your filters.</p>
+  } @else {
+    @for (expense of filteredExpenses; track expense.id) {
       <app-expense-item [expense]="expense" />
     }
-  } @else {
-    <p>No expenses yet. Add one above.</p>
   }
 </main>

@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../firebaseconfig';
 import { user } from '../models/user';
 import { ExpenseService } from './expense-service';
@@ -75,6 +75,13 @@ export class AuthenticationService {
     localStorage.removeItem('currentUserUID');
     this.expenseService.clearExpenses();
     this.budgetService.clearBudgets();
+  }
+
+  async updateProfile(updates: { email?: string; password?: string; budgetGoal?: number }): Promise<void> {
+    const uid = this._uid();
+    if (!uid) throw new Error('No user logged in.');
+    await updateDoc(doc(this.usersCollection, uid), { ...updates });
+    this._currentUser.update((u) => (u ? { ...u, ...updates } : null));
   }
 
   private async fetchUser(uid: string): Promise<user | null> {

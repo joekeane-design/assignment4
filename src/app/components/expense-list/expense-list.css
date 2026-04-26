@@ -2,64 +2,109 @@ main {
   padding: 1.5rem 0;
 }
 
-main h1 {
-  font-size: 2rem;
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 1.25rem;
+}
+
+.list-header h1 {
+  margin: 0;
+  font-size: 2rem;
   color: #0f172a;
 }
 
-.card-title {
-  margin-bottom: 0.75rem;
+.filter-toggle {
+  position: relative;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #334155;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.card-title h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #1e293b;
+.filter-toggle:hover {
+  background: #f8fafc;
 }
 
-.card-content {
+.filter-toggle.active {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.filter-badge {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #2563eb;
+}
+
+.filter-panel {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 1rem;
-  padding: 1rem 1.25rem;
-  margin-bottom: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1.25rem;
 }
 
-.card-content p {
-  margin: 0.5rem 0;
-  color: #334155;
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.card-footer {
+.filter-row {
   display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.card-footer button {
-  min-width: 100px;
-  padding: 0.65rem 1rem;
-  border-radius: 0.75rem;
-  border: none;
-  cursor: pointer;
+.filter-row label {
+  font-size: 0.8rem;
   font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.card-footer button:first-child {
-  background: #0ea5e9;
-  color: #ffffff;
+.filter-row input,
+.filter-row select {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background: #f8fafc;
+  font-size: 0.9rem;
+  color: #0f172a;
 }
 
-.card-footer button:last-child {
-  background: #ef4444;
-  color: #ffffff;
+.clear-btn {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .card-footer {
-    flex-direction: column;
-    align-items: stretch;
-  }
+.clear-btn:hover {
+  background: #e2e8f0;
+}
+
+.result-count {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  color: #64748b;
 }
